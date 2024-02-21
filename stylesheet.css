@@ -1,22 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 body {
   background-color: #414141;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: url("https://i.pinimg.com/originals/78/86/8e/78868e120deac24bc3324bb8b7451713.png");
 }
 
 * {
   font-family: 'VT323', monospace;
   color: #b2c18b;
+  cursor: url("https://i.pinimg.com/originals/78/86/8e/78868e120deac24bc3324bb8b7451713.png");
 }
 
 
 #container {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(107, 105, 105);
   text-align: center;
+  padding: 10px;
+  margin-top: 10vh;
+  border-radius: 15px;
 }
 
 
 #gameCanvas {
   background-color: #abb78a;
+  background-image: url("https://github.com/Ade-mir/snake-game-js/blob/main/snake-game-ai-gen.png?raw=true");
+  background-position: center;
+  background-repeat: no-repeat;
   border: 3px solid;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
 #score {
