@@ -10,20 +10,18 @@
 
 <body>
 
-    <audio src="music/KRTD Title Theme 8 Bit.mp3" 
-    preload="auto"
-    loop="true"                 
-    hidden="true"       
-    autostart="true"
-    controls> 
-</audio> 
-<!--Fungerar inte?-->
+    <audio src="music/KRTD Title Theme 8 Bit.mp3" preload="auto" loop="true" hidden="true" autostart="true" controls>
+    </audio>
+    <!--Fungerar inte?-->
 
-
+    <div id="score">0</div>
+    
     <div id="container">
         <canvas id="gameCanvas" width="500" height="500"> </canvas>
-        <div id="score">0</div>
-        <button id="reset">Start</button>
+        <div class="touchpad">
+            <button id="reset">Start</button>
+        </div>
+    </div>
     </div>
 
     <script src="app.js"></script>
