@@ -2,13 +2,15 @@ const gameCanvas = document.querySelector("#gameCanvas")
 const context = gameCanvas.getContext("2d");
 const scoreText = document.querySelector("#score")
 const reset = document.querySelector('#reset')
+
 const gameWidth = gameCanvas.width
 const gameHeight = gameCanvas.height
+var timeout = setTimeout; 
+
 const boardBackground = "rgb(171 183 138)"
-const snakeBorder = "white";
-const unitSize = 25
+const unitSize = 35
 let running = false
-let xVelocity = unitSize
+let xVelocity = unitSize -5
 let yVelocity = 0
 let foodX
 let foodY
@@ -38,7 +40,7 @@ function gameStart() {
 
 function nextTick() {
     if (running) {
-        setTimeout(() => {
+        timeout = setTimeout(() => {
             clearBoard()
             drawFood()
             moveSnake()
@@ -46,7 +48,7 @@ function nextTick() {
             checkGameOver()
             nextTick()
 
-        }, 75)
+        }, 100)
     }
     else {
         displayGameOver()
@@ -56,7 +58,6 @@ function nextTick() {
 function clearBoard() {
     context.fillStyle = boardBackground
     context.fillRect(0, 0, gameWidth, gameHeight)
-
 }
 
 
@@ -69,9 +70,8 @@ function createFood() {
         if (snake[i].x == foodX || snake[i].y == foodY)
             randomFood()
     }
-
     foodX = randomFood(0, gameWidth - unitSize)
-    foodY = randomFood(0, gameWidth - unitSize)
+    foodY = randomFood(0, gameHeight - unitSize)
 
 
 }
@@ -99,12 +99,12 @@ function moveSnake() {
 
 function drawSnake() {
 
-    context.strokeStyle = snakeBorder
-    context.fillStyle = "black"
-
     snake.forEach(snakePart => {
-        context.fillRect(snakePart.x, snakePart.y, unitSize, unitSize)
-        context.strokeRect(snakePart.x, snakePart.y, unitSize, unitSize)
+
+        let snakeImage = new Image()
+        snakeImage.src = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d3ada6e0-87df-4174-99ae-751ab35bfc84/d9xc58m-345fbf5d-13c3-46b5-8408-d62e247de52f.png/v1/fill/w_1024,h_1256/snake_pixel_art_by_yellow_xrose_d9xc58m-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2QzYWRhNmUwLTg3ZGYtNDE3NC05OWFlLTc1MWFiMzViZmM4NFwvZDl4YzU4bS0zNDVmYmY1ZC0xM2MzLTQ2YjUtODQwOC1kNjJlMjQ3ZGU1MmYucG5nIiwiaGVpZ2h0IjoiPD0xMjU2Iiwid2lkdGgiOiI8PTEwMjQifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uud2F0ZXJtYXJrIl0sIndtayI6eyJwYXRoIjoiXC93bVwvZDNhZGE2ZTAtODdkZi00MTc0LTk5YWUtNzUxYWIzNWJmYzg0XC95ZWxsb3cteHJvc2UtNC5wbmciLCJvcGFjaXR5Ijo5NSwicHJvcG9ydGlvbnMiOjAuNDUsImdyYXZpdHkiOiJjZW50ZXIifX0.hDe_8GUGRTmU23HIguN10QdSlAUVvbTQVriBkFD7L6Q"
+        context.drawImage(snakeImage, snakePart.x, snakePart.y, unitSize, unitSize)
+
     })
 }
 
@@ -126,22 +126,22 @@ function changeDirection(event) {
     const goingLeft = (xVelocity == -unitSize)
 
     switch (true) {
-        case (keyPressed == left && !goingRight):
+        case (keyPressed == left && !goingRight  && !goingLeft):
             xVelocity = -unitSize
             yVelocity = 0
             break
 
-        case (keyPressed == up && !goingDown):
+        case (keyPressed == up && !goingDown  && !goingUp):
             yVelocity = -unitSize
             xVelocity = 0
             break
 
-        case (keyPressed == right && !goingLeft):
+        case (keyPressed == right && !goingLeft  && !goingRight):
             xVelocity = unitSize
             yVelocity = 0
             break
 
-        case (keyPressed == down && !goingUp):
+        case (keyPressed == down && !goingUp && !goingDown):
             xVelocity = 0
             yVelocity = unitSize
             break
@@ -199,5 +199,6 @@ function resetGame() {
     ]
     sound.play()
     reset.textContent = "Reset"
+    clearTimeout(timeout);
     gameStart()
 }
