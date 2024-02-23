@@ -62,18 +62,21 @@ function clearBoard() {
 
 //Funktion som bestämmer matens koordinater, som är random
 function createFood() {
+    //randomFood()
     function randomFood(min, max) {
         const randNum = Math.round((Math.random() * (max - min) + min) / unitSize) * unitSize
         return randNum
     }
-    for (let i = 1; i < snake.length; i += 1) {
-        if (snake[i].x == foodX || snake[i].y == foodY)
-            randomFood()
+
+    for (let i = 0; i < snake.length; i += 1) {
+        if (snake[i].x == foodX || snake[i].y == foodY){
+            foodX = randomFood(0, Width - unitSize)
+            foodY = randomFood(0, Height - unitSize)
+        }
     }
     //deklarerar matens koordinater
     foodX = randomFood(0, Width - unitSize)
     foodY = randomFood(0, Height - unitSize)
-
 
 }
 //Funktion som lägger in en bild vid matens x-y koordinater
