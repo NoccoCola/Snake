@@ -30,6 +30,7 @@ function gameStart() {
     running = true
     scoreText.textContent = score
     createFood()
+
     drawFood()
     nextTick()
     sound.play()
@@ -68,16 +69,16 @@ function createFood() {
         return randNum
     }
 
+    //deklarerar matens koordinaterss
+    foodX = randomFood(0, Width - unitSize)
+    foodY = randomFood(0, Width - unitSize)
+
     for (let i = 0; i < snake.length; i += 1) {
-        if (snake[i].x == foodX || snake[i].y == foodY){
-            foodX = randomFood(0, Width - unitSize)
-            foodY = randomFood(0, Height - unitSize)
+        if (snake[i].x == foodX && snake[i].y == foodY) {
+            createFood()
         }
     }
-    //deklarerar matens koordinater
-    foodX = randomFood(0, Width - unitSize)
-    foodY = randomFood(0, Height - unitSize)
-
+    
 }
 //Funktion som lägger in en bild vid matens x-y koordinater
 function drawFood() {
