@@ -2,11 +2,25 @@
 
 body {
   background-color: rgb(37, 36, 36);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   cursor: url("image/color-pixels-magic-mint-cursor.png"), auto;
+}
+
+body,
+#gameCanvas,
+.touchpad {
+  display: flex;
+}
+
+body,
+#container {
+  flex-direction: column;
+  justify-content: center;
+}
+
+#container,
+.text {
+  text-align: center;
 }
 
 * {
@@ -18,18 +32,14 @@ body {
 
 #container {
   display: inline-flex;
-  flex-direction: column;
-  justify-content: center;
   background: rgb(249 249 249);
   background: linear-gradient(90deg, rgba(128, 128, 128, 1) 0%, rgba(255, 255, 255, 1) 4%);
-  text-align: center;
   padding: 2vh;
   border-radius: 15px;
   height: 90vh;
 }
 
 #gameCanvas {
-  display: flex;
   background-color: #abb78a;
   background-image: url("https://github.com/Ade-mir/snake-game-js/blob/main/snake-game-ai-gen.png?raw=true");
   background-position: center;
@@ -44,24 +54,24 @@ body {
   grid-template-columns: repeat(3, 3fr);
 }
 
-#score {
-  font-size: 7vh;
+#score,
+.text {
   color: black;
+}
+
+#score,
+#highScore {
+  font-size: 7vh;
+}
+
+#score {
   text-align: left;
 }
 
-.text {
-  text-align: center;
-
-  color: black;
-}
-
 #highScore {
-  font-size: 7vh;
   color: #abb78a;
   text-align: right;
 }
-
 
 #reset {
   font-size: 2vh;
@@ -76,7 +86,6 @@ body {
 }
 
 .touchpad {
-  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
